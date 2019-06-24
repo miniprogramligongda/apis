@@ -6,6 +6,9 @@ import (
 
 func main() {
 	e := echo.New()
-	e.GET("searchuser", getSearchUser)
+
+	//e.GET("searchuser", getSearchUser)
+	setRouter(e)
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
