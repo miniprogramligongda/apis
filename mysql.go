@@ -7,31 +7,71 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-func mysql_connect() *DB {
+type Database struct {
+	db *DB
+}
+
+func MysqlConstruct() Database {
 
 	// root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8
 	// root:Mysql的密码@tcp(ip地址与端口)/数据库名称?charset=utf8
 	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8")
-	if err != nil {
-		print("f")
-		panic(err)
-	}
-	rows, _ := db.Query("desc user_info")
-	defer rows.Close()
-	dbNames := make([]string, 0)
-	for rows.Next() {
-		var name string
-		if err = rows.Scan(&name); err != nil {
-			return
-		}
-		dbNames = append(dbNames, name)
-	}
-	fmt.Print(dbNames)
+	checkErr(err)
+	database := Database{db}
+	return database
+}
 
-	stmt, _ := db.Prepare("update user_info set username=? where id=?")
-	res, _ := stmt.Exec("lisi", 1)
-	affect, _ := res.RowsAffected()
-	fmt.Print(affect)
-	//defer db.Close()
-	return db
+// 参数的定义：
+// statement:SELECT * FROM userinfo
+func (this *Database) Query(statement string) *Rows {
+	rows, err := this.db.Query(statement)
+	checkErr(err)
+	return rows
+}
+
+// 参数的定义：
+// statement:"delete from userinfo where uid=?"
+// args: id
+// 例如 db.Delete("delete from userinfo where uid=?", id)
+func (this *Database) Delete(statement string, args ...interface{}) {
+	stmt, err = this.db.Prepare(statement)
+	checkErr(err)
+	res, err = stmt.Exec(args)
+	checkErr(err)
+	affect, err = res.RowsAffected()
+	checkErr(err)
+	fmt.Println(affect)
+}
+
+// 参数的定义：
+// statement:update userinfo set username=? where uid=?
+// args: "astaxieupdate", id
+// 例如 db.Update("update userinfo set username=? where uid=?","astaxieupdate", id)
+func (this *Database) Update(statement string, args ...interface{}) {
+	stmt, err = this.db.Prepare(statement)
+	checkErr(err)
+	res, err = stmt.Exec(args)
+	checkErr(err)
+	affect, err := res.RowsAffected()
+	checkErr(err)
+	fmt.Println(affect)
+}
+
+// 参数的定义：
+// statement:INSERT userinfo SET username=?,departname=?,created=?
+// values: "astaxie", "研发部门", "2012-12-09"
+// 例如 db.Insert("INSERT userinfo SET username=?,departname=?,created=?", "astaxie", "研发部门", "2012-12-09")
+func (this *Database) Insert(statement string, values ...interface{}) {
+	// 插入数据
+	stmt, err := this.db.Prepare(statement)
+	checkErr(err)
+	res, err := stmt.Exec(values...)
+	checkErr(err)
+	id, err := res.LastInsertId()
+	checkErr(err)
+	fmt.Println(id)
+}
+
+func (this *Database) Disconnect() {
+	this.db.Close()
 }
