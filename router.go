@@ -1,11 +1,12 @@
 package main
 
 import (
-	"net/http"
-
+	"./routers"
 	"github.com/labstack/echo"
+	//"net/http"
 )
 
-func getSearchUser(c echo.Context) error {
-	return c.String(http.StatusOK, "Hello, World!")
+func setRouter(e *echo.Echo) {
+	routers.SetRouter1(e)
+	routers.SetRouter2(e)
 }
