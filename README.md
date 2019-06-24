@@ -53,7 +53,7 @@ The back-end of WXminiprogram `分答`. It is wrote by Golang and depends on Ech
 入口控制简易HTTP服务，以及整个后端的配置参数设置。入口接到的http操作请求之后，会调用路由模块新开线程进行业务处理。在业务实现代码中会调用相应的数据库控制模块，对数据库做出相应的修改。
 
 <p align="center">
-  <img width="350" src="https://github.com/miniprogramligongda/apis/blob/readme_dev/imgs/framework.png?raw=true"/>
+  <img width="700" src="https://github.com/miniprogramligongda/apis/blob/readme_dev/imgs/framework.png?raw=true"/>
 </p>
 
 ## Contributor
