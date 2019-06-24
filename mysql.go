@@ -8,7 +8,7 @@ import (
 )
 
 type Database struct {
-	db *DB
+	db *sql.DB
 }
 
 func MysqlConstruct() Database {
