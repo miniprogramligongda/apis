@@ -43,7 +43,7 @@ The back-end of WXminiprogram `分答`. It is wrote by Golang and depends on Ech
 原先Redis也是备选之一，因为Radis拥有『世界上最快数据库』的美誉，但是因为它是单线程，并且数据存取关系是『键值对』，对表形数据有些不友好。所以遂放弃之。
 
 <p align="center">
-  <img width="350" src="https://redis.io/images/redis-white.png"/>
+  <img width="350" src="https://cdn-images-1.medium.com/max/2400/1*i1d88Q8NNrRv6kjf7Ssw4g.png"/>
 </p>
 
 ## 框架设计
