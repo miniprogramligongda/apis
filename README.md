@@ -6,7 +6,7 @@ The back-end of WXminiprogram `分答`. It is wrote by Golang and depends on Ech
 
 ## TODO 
 
-- [ ] Router infrastructure
+- [x] Router infrastructure
 - [ ] MySQL infrastructure
 
 - [ ] Indexly seperated cooperation
