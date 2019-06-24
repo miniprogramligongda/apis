@@ -54,7 +54,7 @@ And we also think about the Redis, bucause the "fastest database on the earth" i
   <img width="350" src="https://cdn-images-1.medium.com/max/2400/1*i1d88Q8NNrRv6kjf7Ssw4g.png"/>
 </p>
 
-## 框架设计
+## Framework design
 
 The system was in 3 layers and 2 modules combination: main entrance, router, sql controller.
 
