@@ -27,7 +27,7 @@ Because in the 8 kinds of web frameworks which are used by Golang, the Echo and 
 </p>
 
 <p align="center">
-  <img width="900" src="http://qwding.github.io/img/golang_framwork_benchmark.png"/>
+  <img width="700" src="http://qwding.github.io/img/golang_framwork_benchmark.png"/>
 </p>
 
 From the begining, we consider the Beego framework because this is created by Chinese and wrote by all the Golang, in addition, there are lots of examples and original documents in real Chinese language. But we find that the Beego is the Golang's PHP MVC -- it didn't fully use the advantages of Golang.
@@ -65,7 +65,7 @@ the entrance use the Echo framework to access the http request and call the Echo
 入口控制简易HTTP服务，以及整个后端的配置参数设置。入口接到的http操作请求之后，会调用路由模块新开线程进行业务处理。在业务实现代码中会调用相应的数据库控制模块，对数据库做出相应的修改。
 
 <p align="center">
-  <img width="700" src="https://github.com/miniprogramligongda/apis/blob/readme_dev/imgs/framework.png?raw=true"/>
+  <img width="900" src="https://github.com/miniprogramligongda/apis/blob/readme_dev/imgs/framework.png?raw=true"/>
 </p>
 
 ## Contributor
