@@ -1,9 +1,8 @@
-package getSearchUser
+package routers
 
 import (
-	"net/http"
-
 	"github.com/labstack/echo"
+	"net/http"
 )
 
 func getSearchUser(c echo.Context) error {
