@@ -4,6 +4,8 @@ The back-end of WXminiprogram "分答". It is wrote by Golang and depends on **E
 
 微信小程序『分答』的后端。使用Go语言进行编写，基于**Echo**框架和**MySQL**数据库。
 
+[apis](https://github.com/miniprogramligongda/apis)
+
 ## TODO 
 
 - [x] Router infrastructure [2019.6.24]
