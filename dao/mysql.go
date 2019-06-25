@@ -12,6 +12,8 @@ type Database struct {
 	db *sql.DB
 }
 
+// MysqlConstruct
+//
 func MysqlConstruct() Database {
 
 	// root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8
