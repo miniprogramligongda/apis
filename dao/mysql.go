@@ -3,6 +3,7 @@ package dao
 import (
 	"database/sql"
 
+	"../conf"
 	"../util"
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -15,11 +16,19 @@ func MysqlConstruct() Database {
 
 	// root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8
 	// root:Mysql的密码@tcp(ip地址与端口)/数据库名称?charset=utf8
-	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8")
+	db, err := sql.Open("mysql", conf.Conf.DbAddr)
 	util.CheckErr(err)
 
 	database := Database{db}
 	return database
+}
+
+// 参数的定义：
+// statement:CREATE TABLE example ( id integer, data varchar(32) )
+// 例如 db.CreateTable("CREATE TABLE example ( id integer, data varchar(32) )")
+func (this *Database) CreateTable(statement string, args ...interface{}) {
+	_, err := this.db.Exec(statement, args...)
+	util.CheckErr(err)
 }
 
 // 参数的定义：
