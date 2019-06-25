@@ -2,7 +2,6 @@ package main
 
 import (
 	"database/sql"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -23,8 +22,8 @@ func MysqlConstruct() Database {
 
 // 参数的定义：
 // statement:SELECT * FROM userinfo
-func (this *Database) Query(statement string) *sql.Rows {
-	rows, err := this.db.Query(statement)
+func (this *Database) Query(statement string, args ...interface{}) *sql.Rows {
+	rows, err := this.db.Query(statement, args...)
 	checkErr(err)
 	return rows
 }
@@ -36,11 +35,8 @@ func (this *Database) Query(statement string) *sql.Rows {
 func (this *Database) Delete(statement string, args ...interface{}) {
 	stmt, err := this.db.Prepare(statement)
 	checkErr(err)
-	res, err := stmt.Exec(args)
+	_, err = stmt.Exec(args...)
 	checkErr(err)
-	affect, err := res.RowsAffected()
-	checkErr(err)
-	fmt.Println(affect)
 }
 
 // 参数的定义：
@@ -50,11 +46,8 @@ func (this *Database) Delete(statement string, args ...interface{}) {
 func (this *Database) Update(statement string, args ...interface{}) {
 	stmt, err := this.db.Prepare(statement)
 	checkErr(err)
-	res, err := stmt.Exec(args)
+	_, err = stmt.Exec(args...)
 	checkErr(err)
-	affect, err := res.RowsAffected()
-	checkErr(err)
-	fmt.Println(affect)
 }
 
 // 参数的定义：
@@ -65,11 +58,8 @@ func (this *Database) Insert(statement string, values ...interface{}) {
 	// 插入数据
 	stmt, err := this.db.Prepare(statement)
 	checkErr(err)
-	res, err := stmt.Exec(values...)
+	_, err = stmt.Exec(values...)
 	checkErr(err)
-	id, err := res.LastInsertId()
-	checkErr(err)
-	fmt.Println(id)
 }
 
 func (this *Database) Disconnect() {
