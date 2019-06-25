@@ -16,9 +16,11 @@ The back-end of WXminiprogram "分答". It is wrote by Golang and depends on Ech
 
 - [ ] Main project entrance
 
+- [ ] Setting the servers' envronment
+
 ## Why doing like this?
 
-Because in the 8 kinds of web frameworks which are used by Golang, the Echo and Gin both have the advantages: faster and more less memory using which defeat all the other web frameworks, but the menbers in the developers have experience at useing Echo, so use it.
+Because in the 8 kinds of web frameworks which are used by Golang, the Echo and Gin both have the advantages: **faster** and **more less memory using** which defeat all the other web frameworks, but the menbers in the developers have experience at useing Echo, so use it.
 
 因为在主流的8种Go语言的web框架中，Echo和Gin都有着别的框架无法媲美的有点：速度快 & 0内存占用，而项目编写人员中有使用Echo框架的经验，所以最后选择了使用Echo框架作为本项目的后端web框架。
 
