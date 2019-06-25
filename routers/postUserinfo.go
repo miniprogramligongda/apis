@@ -6,22 +6,20 @@ import (
 	"github.com/labstack/echo"
 )
 
-type UserInfo struct {
-	wxid      string
-	avatarUrl string
-	city      string
-	country   string
-	gender    int
-	language  string
-	nickName  string
-	province  string
-}
-
 func postUserinfo(c echo.Context) error {
-	u := new(UserInfo)
+	d := dao.NewDaoUserInfo()
+	/*
+	   	var config ConfigStruct
+	       if err := json.Unmarshal([]byte(jsonStr), &config); err == nil {
+	           fmt.Println("================json str 转struct==")
+	           fmt.Println(config)
+	           fmt.Println(config.Host)
+	       }
+	*/
+	u := &dao.UserInfo{}
 	err := c.Bind(u)
 	util.CheckErr(err)
-	db := dao.MysqlConstruct()
-	db.Insert("INSERT user_info SET wxid=?,avatarUrl=?,city=?", u.wxid, u.avatarUrl, u.city)
+	d.Insert(u)
+	d.Close()
 	return nil
 }
