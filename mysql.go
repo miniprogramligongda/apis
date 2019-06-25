@@ -23,7 +23,7 @@ func MysqlConstruct() Database {
 
 // 参数的定义：
 // statement:SELECT * FROM userinfo
-func (this *Database) Query(statement string) *Rows {
+func (this *Database) Query(statement string) *sql.Rows {
 	rows, err := this.db.Query(statement)
 	checkErr(err)
 	return rows
@@ -34,11 +34,11 @@ func (this *Database) Query(statement string) *Rows {
 // args: id
 // 例如 db.Delete("delete from userinfo where uid=?", id)
 func (this *Database) Delete(statement string, args ...interface{}) {
-	stmt, err = this.db.Prepare(statement)
+	stmt, err := this.db.Prepare(statement)
 	checkErr(err)
-	res, err = stmt.Exec(args)
+	res, err := stmt.Exec(args)
 	checkErr(err)
-	affect, err = res.RowsAffected()
+	affect, err := res.RowsAffected()
 	checkErr(err)
 	fmt.Println(affect)
 }
@@ -48,9 +48,9 @@ func (this *Database) Delete(statement string, args ...interface{}) {
 // args: "astaxieupdate", id
 // 例如 db.Update("update userinfo set username=? where uid=?","astaxieupdate", id)
 func (this *Database) Update(statement string, args ...interface{}) {
-	stmt, err = this.db.Prepare(statement)
+	stmt, err := this.db.Prepare(statement)
 	checkErr(err)
-	res, err = stmt.Exec(args)
+	res, err := stmt.Exec(args)
 	checkErr(err)
 	affect, err := res.RowsAffected()
 	checkErr(err)
