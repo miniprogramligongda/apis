@@ -5,6 +5,9 @@ import (
 	"math/rand"
 	"testing"
 	"time"
+
+	"./dao"
+	"./util"
 )
 
 func RandInt(min, max int) int {
@@ -16,7 +19,7 @@ func RandInt(min, max int) int {
 }
 
 func TestMysql(t *testing.T) {
-	db := MysqlConstruct()
+	db := dao.MysqlConstruct()
 	defer db.Disconnect()
 
 	id := RandInt(5, 1000)
@@ -32,7 +35,7 @@ func TestMysql(t *testing.T) {
 		var _username string
 		var _password string
 		err := rows.Scan(&_id, &_username, &_password)
-		checkErr(err)
+		util.CheckErr(err)
 		fmt.Printf("Query test : %d %s %s\n", _id, _username, _password)
 	}
 
@@ -46,7 +49,7 @@ func TestMysql(t *testing.T) {
 		var _username string
 		var _password string
 		err := rows.Scan(&_id, &_username, &_password)
-		checkErr(err)
+		util.CheckErr(err)
 		fmt.Printf("Query test : %d %s %s\n", _id, _username, _password)
 		if _username != update_username {
 			t.Errorf("Username updated failed")

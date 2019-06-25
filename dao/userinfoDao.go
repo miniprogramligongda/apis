@@ -8,14 +8,14 @@ import (
 
 // 需要通过tag 规定primary_key，通过index规定索引
 type UserInfo struct {
-	Wxid      string `gorm:"primary_key;type:varchar(28);not null;index:wxid_idx"`
+	Openid    string `gorm:"primary_key;type:varchar(28);not null;index:openid_idx"`
 	AvatarUrl string `gorm:"type:varchar(128);not null"`
-	City      string `gorm:"type:varchar(64)"`
-	Country   string `gorm:"type:varchar(64)"`
-	Gender    int    `gorm:"type:integer"`
-	Language  string `gorm:"type:varchar(64)"`
+	Gender    int    `gorm:"type:tinyint(1)"`
 	Nickname  string `gorm:"type:varchar(32)"`
-	Province  string `gorm:"type:varchar(32)"`
+	//City      string `gorm:"type:varchar(64)"`
+	//Country   string `gorm:"type:varchar(64)"`
+	//Language  string `gorm:"type:varchar(64)"`
+	//Province  string `gorm:"type:varchar(32)"`
 }
 
 type DaoUserInfo struct {
@@ -41,9 +41,9 @@ func (this *DaoUserInfo) Insert(u *UserInfo) {
 	util.CheckErr(this.db.Create(u).Error)
 }
 
-func (this *DaoUserInfo) FindByWxid(wxid string) *UserInfo {
+func (this *DaoUserInfo) FindByOpenid(openid string) *UserInfo {
 	result := &UserInfo{}
-	err := this.db.Model(&UserInfo{}).Where("wxid = " + wxid).First(result).Error
+	err := this.db.Model(&UserInfo{}).Where("openid = ?", openid).First(result).Error
 	util.CheckErr(err)
 	return result
 }

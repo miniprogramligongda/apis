@@ -9,6 +9,5 @@ func main() {
 
 	//e.GET("searchuser", getSearchUser)
 	setRouter(e)
-
 	e.Logger.Fatal(e.Start(":1323"))
 }
