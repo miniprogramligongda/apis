@@ -1,8 +1,9 @@
-package main
+package dao
 
 import (
 	"database/sql"
 
+	"../util"
 	_ "github.com/go-sql-driver/mysql"
 )
 
@@ -15,7 +16,8 @@ func MysqlConstruct() Database {
 	// root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8
 	// root:Mysql的密码@tcp(ip地址与端口)/数据库名称?charset=utf8
 	db, err := sql.Open("mysql", "root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8")
-	checkErr(err)
+	util.CheckErr(err)
+
 	database := Database{db}
 	return database
 }
@@ -24,7 +26,7 @@ func MysqlConstruct() Database {
 // statement:SELECT * FROM userinfo
 func (this *Database) Query(statement string, args ...interface{}) *sql.Rows {
 	rows, err := this.db.Query(statement, args...)
-	checkErr(err)
+	util.CheckErr(err)
 	return rows
 }
 
@@ -34,9 +36,9 @@ func (this *Database) Query(statement string, args ...interface{}) *sql.Rows {
 // 例如 db.Delete("delete from userinfo where uid=?", id)
 func (this *Database) Delete(statement string, args ...interface{}) {
 	stmt, err := this.db.Prepare(statement)
-	checkErr(err)
+	util.CheckErr(err)
 	_, err = stmt.Exec(args...)
-	checkErr(err)
+	util.CheckErr(err)
 }
 
 // 参数的定义：
@@ -45,9 +47,9 @@ func (this *Database) Delete(statement string, args ...interface{}) {
 // 例如 db.Update("update userinfo set username=? where uid=?","astaxieupdate", id)
 func (this *Database) Update(statement string, args ...interface{}) {
 	stmt, err := this.db.Prepare(statement)
-	checkErr(err)
+	util.CheckErr(err)
 	_, err = stmt.Exec(args...)
-	checkErr(err)
+	util.CheckErr(err)
 }
 
 // 参数的定义：
@@ -57,9 +59,9 @@ func (this *Database) Update(statement string, args ...interface{}) {
 func (this *Database) Insert(statement string, values ...interface{}) {
 	// 插入数据
 	stmt, err := this.db.Prepare(statement)
-	checkErr(err)
+	util.CheckErr(err)
 	_, err = stmt.Exec(values...)
-	checkErr(err)
+	util.CheckErr(err)
 }
 
 func (this *Database) Disconnect() {
