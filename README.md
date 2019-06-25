@@ -11,7 +11,7 @@ The back-end of WXminiprogram "分答". It is wrote by Golang and depends on **E
 
 - [ ] Indexly seperated cooperation
   - [ ] 『收听』
-  - [ ] 『心声』
+  - [ ] 『找人』
   - [ ] 『我的』
 
 - [ ] Main project entrance
