@@ -6,6 +6,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// UserInfo struct
 // 需要通过tag 规定primary_key，通过index规定索引
 type UserInfo struct {
 	Wxid      string `gorm:"primary_key;type:varchar(28);not null;index:wxid_idx"`
