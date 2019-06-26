@@ -1,6 +1,7 @@
 package routers
 
 import (
+	"net/http"
 	"time"
 
 	"../dao"
@@ -31,5 +32,5 @@ func postIdea(c echo.Context) error {
 	defer d.Close()
 	d.Insert(u)
 
-	return nil
+	return c.String(http.StatusOK, "ok")
 }

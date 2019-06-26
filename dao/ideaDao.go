@@ -48,6 +48,12 @@ func (this *DaoIdea) FindByIid(iid int64) *Idea {
 	return result
 }
 
+func (this *DaoIdea) QueryPage(page int) ([]*Idea, error) {
+	list := make([]*Idea, 0)
+	err := this.db.Model(&Idea{}).Offset(page * 10).Limit(10).Order("iid desc").Find(&list).Error
+	return list, err
+}
+
 func (this *DaoIdea) Close() {
 	if this.db != nil {
 		this.db.Close()
