@@ -7,5 +7,5 @@ type Config struct {
 var Conf = &Config{""}
 
 func init() {
-	Conf.DbAddr = "root:123456@tcp(127.0.0.1:3306)/mysql?charset=utf8"
+	Conf.DbAddr = "root:apisapis@tcp(apis.2.chensmallx.top:3306)/mysql?charset=utf8"
 }
