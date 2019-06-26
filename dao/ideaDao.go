@@ -56,6 +56,14 @@ func (this *DaoIdea) QueryPage(page int) ([]*Idea, error) {
 	return list, err
 }
 
+func (this *DaoIdea) IncrementLikes(iid int64) {
+	tx := this.db.Begin()
+	defer tx.Commit()
+
+	u := this.FindByIid(iid)
+	this.db.Model(u).Update("like", u.Like+1)
+}
+
 func (this *DaoIdea) Close() {
 	if this.db != nil {
 		this.db.Close()

@@ -13,4 +13,5 @@ func SetRouter1(e *echo.Echo) {
 	e.GET("getIdea", getIdea)
 	e.POST("postUserinfo", postUserinfo)
 	e.POST("postIdea", postIdea)
+	e.GET("like", getLike)
 }
