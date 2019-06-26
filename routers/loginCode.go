@@ -9,15 +9,29 @@ import (
 	"net/http"
 )
 
+type logincode struct {
+	Code      string
+	AvatarURL string
+	Nickname  string
+	Gender    string
+}
+
 func loginCode(c echo.Context) error {
 	// from Configuration of this project
 	appID := conf.Conf.AppID
 	secret := conf.Conf.Secret
 
-	code := c.QueryParam("code")
-	avatarURL := c.QueryParam("avatarUrl")
-	nickname := c.QueryParam("nickname")
-	_gender := c.QueryParam("gender")
+	login := &logincode{}
+	err := c.Bind(login)
+
+	// code := c.QueryParam("code")
+	// avatarURL := c.QueryParam("avatarUrl")
+	// nickname := c.QueryParam("nickname")
+	// _gender := c.QueryParam("gender")
+	code := login.Code
+	avatarURL := login.AvatarURL
+	nickname := login.Nickname
+	_gender := login.Gender
 	var gender int
 
 	if _gender == "1" {
