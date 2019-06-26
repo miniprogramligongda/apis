@@ -26,11 +26,40 @@ func loginCode(c echo.Context) error {
 	}
 
 	openID := res.OpenID
-	addUserInfo(appID, avatarURL, gender, nickname)
-	return err
+	sessionKey := res.SessionKey
+
+	defer func() {
+		if err := recover(); err != nil {
+			fmt.Printf("run time panic: %v", err)
+		}
+	}()
+	err = addUserInfo(openID, avatarURL, gender, nickname)
+	if err != nil {
+		fmt.Print("cannot add userInfo by openID: %s, error: %s/n", openID, err)
+		return c.String(http.StatusOK, "")
+	}
+
+	var R struct{ OpenID, SessionKey string }
+	R.OpenID = openID
+	R.SessionKey = sessionKey
+
+	return c.JSON(http.StatusOK, R)
 }
 
 func addUserInfo(openID, avatarURL, gender, nickname string) error {
-	dao.FindByOpenid
+	d := dao.NewDaoUserInfo()
+	isHave := d.HaveOpenid(openID)
+	if isHave {
+		err := fmt.Errorf("Have this record of openid: %s", openID)
+		return nil
+	}
+
+	userInfo := &dao.UserInfo{}
+	userInfo.OpenID = openID
+	userInfo.avatarUrl = avatarURL
+	userInfo.Gender = gender
+	userInfo.Nickname = nickname
+	d.Insert(userInfo)
+
 	return nil
 }
