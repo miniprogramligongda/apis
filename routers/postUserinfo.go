@@ -8,6 +8,7 @@ import (
 
 func postUserinfo(c echo.Context) error {
 	d := dao.NewDaoUserInfo()
+	defer d.Close()
 	/*
 	   	var config ConfigStruct
 	       if err := json.Unmarshal([]byte(jsonStr), &config); err == nil {
@@ -19,6 +20,8 @@ func postUserinfo(c echo.Context) error {
 	u := &dao.UserInfo{}
 	err := c.Bind(u)
 	util.CheckErr(err)
+	//user := d.FindByOpenid(u.Openid)
+
 	d.Insert(u)
 	d.Close()
 	return nil
