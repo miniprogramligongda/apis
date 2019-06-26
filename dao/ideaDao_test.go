@@ -17,9 +17,14 @@ func TestIdeaDao(t *testing.T) {
 	i.Favorite = 0
 	i.Like = 0
 
-	dao := NewDaoIdea()
+	d := NewDaoIdea()
 	fmt.Printf("Prepare to insert : %v\n", i)
-	dao.Insert(i)
-	result := dao.FindByIid(i.Iid)
+	d.Insert(i)
+	result := d.FindByIid(i.Iid)
 	fmt.Printf("result : %v", result)
+
+	list, err := d.QueryPage(0)
+	if err == nil {
+		fmt.Print(list[0])
+	}
 }
