@@ -9,12 +9,12 @@ import (
 
 // Idea struct is define and hold table idea
 type Idea struct {
-	Iid      string    `gorm:"primary_key;type:int(11);not null;index:iid_idx"`
+	Iid      int64     `gorm:"primary_key;type:int(11) auto_increment;not null;index:iid_idx"`
 	Openid   string    `gorm:"type:varchar(28);not null"`
-	Time     time.Time `gorm:"type:timestamp;not null; default now()"`
+	Time     time.Time `gorm:"not null; default now()"` //`gorm:"type:timestamp;not null; default now()"`
 	Content  string    `gorm:"type:varchar(1024);not null"`
-	Like     string    `gorm:"type:smallint(6);not null;default 0"`
-	Favorite string    `gorm:"type:smallint(6);not null;default 0"`
+	Like     int64     `gorm:"type:smallint(6);not null; default:0"`
+	Favorite int64     `gorm:"type:smallint(6);not null; default:0"`
 }
 
 // DaoIdea struct contains a db object of grom.DB
@@ -40,9 +40,9 @@ func (this *DaoIdea) Insert(u *Idea) {
 	util.CheckErr(this.db.Create(u).Error)
 }
 
-func (this *DaoIdea) FindByIid(iid string) *Idea {
+func (this *DaoIdea) FindByIid(iid int64) *Idea {
 	result := &Idea{}
-	err := this.db.Model(&Idea{}).Where("iid=" + iid).First(result).Error
+	err := this.db.Model(&Idea{}).Where("iid = ?", iid).First(result).Error
 	util.CheckErr(err)
 	return result
 }
