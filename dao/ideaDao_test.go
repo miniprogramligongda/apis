@@ -28,12 +28,3 @@ func TestIdeaDao(t *testing.T) {
 		fmt.Print(list[0])
 	}
 }
-
-// type Idea struct {
-// 	Iid      string    `gorm:"primary_key;type:int(11);not null;index:iid_idx"`
-// 	Openid   string    `gorm:"type:varchar(28);not null"`
-// 	Time     time.Time `gorm:"type:timestamp;not null; default now()"`
-// 	Content  string    `gorm:"type:varchar(1024);not null"`
-// 	Like     string    `gorm:"type:smallint(6);not null;default 0"`
-// 	Favorite string    `gorm:"type:smallint(6);not null;default 0"`
-// }
