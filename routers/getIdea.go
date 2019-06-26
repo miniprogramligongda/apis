@@ -8,6 +8,10 @@ import (
 	"github.com/labstack/echo"
 )
 
+func checkFriends(openid string, list []*dao.Idea) {
+
+}
+
 func getIdea(c echo.Context) error {
 	Openid := c.QueryParam("Openid")
 	PageRaw := c.QueryParam("Page")
@@ -17,9 +21,6 @@ func getIdea(c echo.Context) error {
 	}
 	d := dao.NewDaoIdea()
 	list, err := d.QueryPage(page)
-	if err == nil && len(list) != 0 {
-
-	}
-
-	return c.String(http.StatusOK, "Hello, World!")
+	checkFriends(Openid, list)
+	c.JSON(http.StatusOK, list)
 }

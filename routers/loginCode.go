@@ -1,12 +1,12 @@
 package routers
 
 import (
-	"../conf"
-	"../dao"
 	"fmt"
+	"net/http"
+
+	"../conf"
 	"github.com/labstack/echo"
 	"github.com/medivhzhan/weapp"
-	"net/http"
 )
 
 func loginCode(c echo.Context) error {
@@ -31,6 +31,6 @@ func loginCode(c echo.Context) error {
 }
 
 func addUserInfo(openID, avatarURL, gender, nickname string) error {
-	dao.FindByOpenid
+	//dao.FindByOpenid
 	return nil
 }
