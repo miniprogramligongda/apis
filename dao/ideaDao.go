@@ -46,7 +46,9 @@ func (this *DaoIdea) Insert(u *Idea) {
 func (this *DaoIdea) FindByIid(iid int64) *Idea {
 	result := &Idea{}
 	err := this.db.Model(&Idea{}).Where("iid = ?", iid).First(result).Error
-	util.CheckErr(err)
+	if err != nil {
+		return nil
+	}
 	return result
 }
 
@@ -62,6 +64,16 @@ func (this *DaoIdea) IncrementLikes(iid int64) {
 
 	u := this.FindByIid(iid)
 	this.db.Model(u).Update("like", u.Like+1)
+}
+
+func (this *DaoIdea) IncrementFavs(iid int64) {
+	tx := this.db.Begin()
+	defer tx.Commit()
+
+	u := this.FindByIid(iid)
+	if u != nil {
+		this.db.Model(u).Update("favorite", u.Favorite+1)
+	}
 }
 
 func (this *DaoIdea) Close() {
