@@ -50,8 +50,6 @@ func (this *DaoIdea) FindByIid(iid int64) *Idea {
 	return result
 }
 
-func (this *DaoIdea) 
-
 func (this *DaoIdea) Close() {
 	if this.db != nil {
 		this.db.Close()
