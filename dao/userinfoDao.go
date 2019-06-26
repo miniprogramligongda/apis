@@ -3,6 +3,7 @@ package dao
 import (
 	"../conf"
 	"../util"
+	"fmt"
 	"github.com/jinzhu/gorm"
 )
 
@@ -47,6 +48,18 @@ func (this *DaoUserInfo) FindByOpenid(openid string) (*UserInfo, error) {
 	result := &UserInfo{}
 	err := this.db.Model(&UserInfo{}).Where("openid = ?", openid).First(result).Error
 	return result, err
+}
+
+func (this *DaoUserInfo) HaveOpenid(openid string) bool {
+	result := &UserInfo{}
+	err := this.db.Model(&UserInfo{}).Where("openid = ?", openid).First(result).Error
+	//fmt.Println("result: ", result)
+	//fmt.Println("err: ", err)
+	if err != nil {
+		fmt.Printf("have not record of openid: %s , and err: %s\n", openid, err)
+		return false
+	}
+	return true
 }
 
 func (this *DaoUserInfo) Close() {
