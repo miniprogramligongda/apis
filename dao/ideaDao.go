@@ -1,10 +1,11 @@
 package dao
 
 import (
+	"time"
+
 	"../conf"
 	"../util"
 	"github.com/jinzhu/gorm"
-	"time"
 )
 
 // Idea struct is define and hold table idea

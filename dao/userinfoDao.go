@@ -43,11 +43,10 @@ func (this *DaoUserInfo) Insert(u *UserInfo) {
 	util.CheckErr(this.db.Create(u).Error)
 }
 
-func (this *DaoUserInfo) FindByOpenid(openid string) *UserInfo {
+func (this *DaoUserInfo) FindByOpenid(openid string) (*UserInfo, error) {
 	result := &UserInfo{}
 	err := this.db.Model(&UserInfo{}).Where("openid = ?", openid).First(result).Error
-	util.CheckErr(err)
-	return result
+	return result, err
 }
 
 func (this *DaoUserInfo) Close() {
