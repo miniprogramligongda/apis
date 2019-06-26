@@ -10,7 +10,7 @@ import (
 //
 func TestIdeaDao(t *testing.T) {
 	i := &Idea{}
-	i.Iid = 2
+	//i.Iid = 2
 	i.Openid = fmt.Sprintf("%028d", 1)
 	i.Time = time.Now()
 	i.Content = "a test idea"
