@@ -15,8 +15,8 @@ func TestUserinfoDao(t *testing.T) {
 	u.Gender = 1
 	u.Nickname = "Niko"
 	d := NewDaoUserInfo()
-	fmt.Printf("Prepare to insert : %v\n", u)
-	d.Insert(u)
+	//fmt.Printf("Prepare to insert : %v\n", u)
+	d.HaveOpenid("shshs")
 	result, _ := d.FindByOpenid(u.Openid)
 	fmt.Printf("result : %v", result)
 }
