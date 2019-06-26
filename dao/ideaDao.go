@@ -23,7 +23,7 @@ type DaoIdea struct {
 	db *gorm.DB
 }
 
-// NewDaoIdea create a db connect to table Idea
+// NewDaoIdea create a db connect to table Idea.
 func NewDaoIdea() (d *DaoIdea) {
 	d = &DaoIdea{}
 	d.db, _ = gorm.Open("mysql", conf.Conf.DbAddr)
@@ -32,8 +32,8 @@ func NewDaoIdea() (d *DaoIdea) {
 	return
 }
 
-// Insert insert data into table Idea
-func (this *DaoIdea) Insert(u *Idea) {
+// InsertIdea insert data into table Idea.
+func (this *DaoIdea) InsertIdea(u *Idea) {
 	if !this.db.HasTable(&Idea{}) {
 		err := this.db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&Idea{}).Error
 		util.CheckErr(err)
@@ -41,6 +41,8 @@ func (this *DaoIdea) Insert(u *Idea) {
 	util.CheckErr(this.db.Create(u).Error)
 }
 
+// FindByIid func
+//
 func (this *DaoIdea) FindByIid(iid int64) *Idea {
 	result := &Idea{}
 	err := this.db.Model(&Idea{}).Where("iid = ?", iid).First(result).Error
