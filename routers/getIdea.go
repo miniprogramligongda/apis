@@ -22,5 +22,5 @@ func getIdea(c echo.Context) error {
 	d := dao.NewDaoIdea()
 	list, err := d.QueryPage(page)
 	checkFriends(Openid, list)
-	c.JSON(http.StatusOK, list)
+	return c.JSON(http.StatusOK, list)
 }

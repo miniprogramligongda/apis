@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"../conf"
+	"../dao"
 	"github.com/labstack/echo"
 	"github.com/medivhzhan/weapp"
 )
@@ -31,6 +32,6 @@ func loginCode(c echo.Context) error {
 }
 
 func addUserInfo(openID, avatarURL, gender, nickname string) error {
-	//dao.FindByOpenid
+	dao.FindByOpenid
 	return nil
 }
