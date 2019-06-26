@@ -23,6 +23,7 @@ type DaoUserInfo struct {
 	db *gorm.DB
 }
 
+// NewDaoUserInfo
 func NewDaoUserInfo() (d *DaoUserInfo) {
 	d = &DaoUserInfo{}
 	d.db, _ = gorm.Open("mysql", conf.Conf.DbAddr)
