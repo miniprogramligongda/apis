@@ -32,8 +32,8 @@ func NewDaoIdea() (d *DaoIdea) {
 	return
 }
 
-// InsertIdea insert data into table Idea.
-func (this *DaoIdea) InsertIdea(u *Idea) {
+// Insert insert data into table Idea.
+func (this *DaoIdea) Insert(u *Idea) {
 	if !this.db.HasTable(&Idea{}) {
 		err := this.db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&Idea{}).Error
 		util.CheckErr(err)
