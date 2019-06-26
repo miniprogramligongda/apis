@@ -43,6 +43,9 @@ func convertType(list []*dao.Idea, Openid string) []*jsonType {
 		}
 
 		checkFriends(u, Openid)
+		if u.Friend == 0 {
+			u.AvatarUrl = "https://github.com/miniprogramligongda/apis/blob/master/timg.jpeg"
+		}
 		result = append(result, u)
 	}
 	return result
