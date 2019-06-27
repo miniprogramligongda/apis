@@ -10,5 +10,14 @@ func SetRouter2(e *echo.Echo) {
 
 	// For example
 	e.GET("getSearchUser", getSearchUser)
+
+	//
 	e.POST("loginCode", loginCode)
+
+	// friend router
+	e.POST("friendRequest", friendRequest)
+	e.GET("friendRequestList", friendRequestList)
+	e.POST("friendRequestAgree", friendRequestAgree)
+	e.GET("friendList", friendList)
+
 }
