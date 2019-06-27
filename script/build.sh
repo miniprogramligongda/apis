@@ -1,11 +1,11 @@
 #!/bin/bash -v
 
 echo "set proxy"
-nohup ss-local -c ./script/ss.json &
+#nohup ss-local -c ./script/ss.json &
 ps -aux | grep ss-local
 
-export http_proxy=socks5://127.0.0.1:1086
-export https_proxy=socks5://127.0.0.1:1086
+#export http_proxy=socks5://127.0.0.1:1086
+#export https_proxy=socks5://127.0.0.1:1086
 echo $http_proxy
 echo $https_proxy
 
@@ -40,4 +40,4 @@ echo "build OK!"
 
 echo "unset proxy"
 unset http_proxy https_proxy
-killall ss-local
+#killall ss-local
