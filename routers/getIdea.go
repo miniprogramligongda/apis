@@ -45,6 +45,7 @@ func convertType(list []*dao.Idea, Openid string) []*jsonType {
 		checkFriends(u, Openid)
 		if u.Friend == 0 {
 			u.AvatarUrl = "https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=e746333c8cd4b31cf0699cbdb7e60b47/d788d43f8794a4c2d0b5cf5409f41bd5ad6e393e.jpg"
+			u.Nickname = "匿名用户"
 		}
 		result = append(result, u)
 	}

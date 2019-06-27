@@ -66,6 +66,18 @@ func (this *DaoIdea) IncrementLikes(iid int64) {
 	this.db.Model(u).Update("like", u.Like+1)
 }
 
+func (this *DaoIdea) DecrementFavs(iid int64) {
+	tx := this.db.Begin()
+	defer tx.Commit()
+
+	u := this.FindByIid(iid)
+	if u != nil {
+		if u.Favorite > 0 {
+			this.db.Model(u).Update("favorite", u.Favorite-1)
+		}
+	}
+}
+
 func (this *DaoIdea) IncrementFavs(iid int64) {
 	tx := this.db.Begin()
 	defer tx.Commit()

@@ -18,10 +18,10 @@ func getUnfav(c echo.Context) error {
 	}
 	d := dao.NewDaoIdea()
 	defer d.Close()
-	d.IncrementFavs(iid)
+	d.DecrementFavs(iid)
 
 	dFav := dao.NewDaoFavorite()
 	defer dFav.Close()
-	dFav.AddFavToUser(Openid, iid)
+	dFav.DelFavOfUser(Openid, iid)
 	return c.String(http.StatusOK, "hair++")
 }
