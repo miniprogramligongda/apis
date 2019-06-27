@@ -3,6 +3,7 @@ package dao
 import (
 	"../conf"
 	//"../util"
+	"fmt"
 	"github.com/jinzhu/gorm"
 	//"time"
 )
@@ -39,11 +40,15 @@ func (this *DaoFriend) Close() {
 // Insert function
 func (this *DaoFriend) Insert(u *Friend) error {
 	if !this.db.HasTable(&Friend{}) {
-		err := this.db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf-8").CreateTable(&Friend{}).Error
+		fmt.Println("no table friend")
+		err := this.db.Set("gorm:table_options", "ENGINE=InnoDB DEFAULT CHARSET=utf8").CreateTable(&Friend{}).Error
 		if err != nil {
 			return err
 		}
+	} else {
+		fmt.Println("table friend exist")
 	}
+
 	if err := this.db.Create(u).Error; err != nil {
 		return err
 	}
