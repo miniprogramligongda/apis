@@ -4,12 +4,12 @@ echo "set proxy"
 nohup ss-local -c ./script/ss.json &
 ps -aux | grep ss-local
 
-export http_proxy=socks5://127.0.0.1:1080
-export https_proxy=socks5://127.0.0.1:1080
+export http_proxy=socks5://127.0.0.1:1086
+export https_proxy=socks5://127.0.0.1:1086
 echo $http_proxy
 echo $https_proxy
 
-echo "go env"
+echo "$GOROOT/bin/go env"
 $GOROOT/bin/go env
 
 echo "getting redis"
