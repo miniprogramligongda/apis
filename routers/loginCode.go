@@ -44,7 +44,7 @@ func loginCode(c echo.Context) error {
 	res, err := weapp.Login(appID, secret, code)
 	if err != nil {
 		fmt.Printf("%s", err.Error())
-		return c.String(http.StatusOK, "getOpenIDFailed")
+		return c.String(http.StatusInternalServerError, "getOpenIDFailed")
 	}
 
 	openID := res.OpenID
@@ -73,7 +73,7 @@ func addUserInfo(openID, avatarURL, nickname string, gender int) error {
 	isHave := d.HaveOpenid(openID)
 	if isHave {
 		fmt.Printf("Have this record of openid: %s", openID)
-		return nil
+		return nil // fmt.Errorf("have this userinfo")
 	}
 
 	userInfo := &dao.UserInfo{}

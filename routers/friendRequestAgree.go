@@ -23,7 +23,7 @@ func friendRequestAgree(c echo.Context) error {
 	err = d.UpdateStatusByOSbject(subjectOpenid, objectOpenid, 1)
 	if err != nil {
 		fmt.Println(err)
-		return c.String(http.StatusAccepted, "agree failed.")
+		return c.String(http.StatusInternalServerError, "agree failed.")
 	}
 
 	newFriend := &dao.Friend{}
@@ -34,7 +34,7 @@ func friendRequestAgree(c echo.Context) error {
 	err = d.Insert(newFriend)
 	if err != nil {
 		fmt.Println(err)
-		return c.String(http.StatusAccepted, "agree failed.")
+		return c.String(http.StatusInternalServerError, "agree failed.")
 	}
 
 	return c.String(http.StatusOK, "agree already.")

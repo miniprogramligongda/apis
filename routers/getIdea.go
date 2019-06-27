@@ -61,7 +61,7 @@ func getIdea(c echo.Context) error {
 	PageRaw := c.QueryParam("Page")
 	page, err := strconv.Atoi(PageRaw)
 	if err != nil {
-		return c.JSON(http.StatusOK, "error : Page should be number")
+		return c.JSON(http.StatusBadRequest, "error : Page should be number")
 	}
 	d := dao.NewDaoIdea()
 	defer d.Close()

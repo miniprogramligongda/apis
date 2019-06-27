@@ -1,0 +1,9 @@
+{
+    "server":"206.189.71.225",
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "server_port":333,
+    "password":"apisapis",
+    "timeout":300,
+    "method":"aes-256-cfb"
+  }

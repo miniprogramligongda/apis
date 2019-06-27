@@ -1,5 +1,10 @@
 #!/bin/bash
 
+echo "set proxy"
+nohup ss-local -c ./script/ss.json &
+export http_proxy=socks5://127.0.0.1:1080
+export https_proxy=socks5://127.0.0.1:1080
+
 go get -u "github.com/garyburd/redigo/redis"
 echo "got redis"
 
@@ -17,3 +22,9 @@ echo "got weapp"
 
 go build
 echo "build OK!"
+
+echo "unset proxy"
+unset http_proxy https_proxy
+killall ss-local
+killall ss-local
+killall ss-local
