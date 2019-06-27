@@ -17,7 +17,7 @@ func friendRequestList(c echo.Context) error {
 	d := dao.NewDaoFriend()
 	defer d.Close()
 
-	list, err := d.FindByObjectAndStatus(objectOpenid, 0)
+	list, err := d.FindBySubjectAndStatus(objectOpenid, 0)
 	if err != nil {
 		fmt.Println(err)
 	}

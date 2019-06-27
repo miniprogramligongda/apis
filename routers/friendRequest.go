@@ -25,7 +25,7 @@ func friendRequest(c echo.Context) error {
 	d := dao.NewDaoFriend()
 	err = d.Insert(friend)
 	if err != nil {
-		return c.String(http.StatusAccepted, "request duplicate.")
+		return c.String(http.StatusAccepted, "request duplicate.") // TODO: 加一个 IsExist（O,S）
 	}
 
 	return c.String(http.StatusOK, "request succeed.")
