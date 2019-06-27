@@ -20,15 +20,15 @@ func friendRequestAgree(c echo.Context) error {
 	subjectOpenid := frl.SubjectOpenid
 
 	d := dao.NewDaoFriend()
-	err = d.UpdateStatusByOSbject(objectOpenid, subjectOpenid, 1)
+	err = d.UpdateStatusByOSbject(subjectOpenid, objectOpenid, 1)
 	if err != nil {
 		fmt.Println(err)
 		return c.String(http.StatusAccepted, "agree failed.")
 	}
 
 	newFriend := &dao.Friend{}
-	newFriend.ObjectOpenid = subjectOpenid
-	newFriend.SubjectOpenid = objectOpenid
+	newFriend.ObjectOpenid = objectOpenid
+	newFriend.SubjectOpenid = subjectOpenid
 	newFriend.Status = 1
 
 	err = d.Insert(newFriend)
