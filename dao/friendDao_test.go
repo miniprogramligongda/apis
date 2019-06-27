@@ -14,12 +14,12 @@ func TestFriendDao(t *testing.T) {
 
 	d := NewDaoFriend()
 
-	// TEST PASS
-	// fmt.Println("insert: ", f)
-	// errI := d.Insert(f)
-	// if errI != nil {
-	// 	fmt.Println(errI)
-	// }
+	//TEST PASS
+	fmt.Println("insert: ", f)
+	errI := d.Insert(f)
+	if errI != nil {
+		fmt.Println(errI)
+	}
 
 	fmt.Printf("find by O:%s & St:%d\n", f.ObjectOpenid, f.Status)
 	fList, errF := d.FindByObjectAndStatus(f.ObjectOpenid, f.Status)
@@ -27,6 +27,18 @@ func TestFriendDao(t *testing.T) {
 		fmt.Println(errF)
 	} else {
 		fmt.Println("result:")
+		for _, item := range fList {
+			fmt.Printf("O:%s\nS:%s\nST:%d\nN:%s\n", item.ObjectOpenid, item.SubjectOpenid, item.Status, item.Notes)
+		}
+	}
+
+	fmt.Printf("find by S:%s & St:%d\n", f.SubjectOpenid, f.Status)
+	fList, errF = d.FindBySubjectAndStatus(f.SubjectOpenid, f.Status)
+	if errF != nil {
+		fmt.Println(errF)
+	} else {
+		fmt.Println("result:")
+		fmt.Println(fList)
 		for _, item := range fList {
 			fmt.Printf("O:%s\nS:%s\nST:%d\nN:%s\n", item.ObjectOpenid, item.SubjectOpenid, item.Status, item.Notes)
 		}
