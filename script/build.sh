@@ -20,6 +20,11 @@ echo "got echo"
 go get -u "github.com/medivhzhan/weapp"
 echo "got weapp"
 
+killall apis
+killall apis
+killall apis
+echo "kill the last edition apis"
+
 go build
 echo "build OK!"
 
