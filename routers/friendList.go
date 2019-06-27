@@ -19,6 +19,7 @@ func friendList(c echo.Context) error {
 	list, err := d.FindByObjectAndStatus(objectOpenid, 1)
 	if err != nil {
 		fmt.Println(err)
+		return c.String(http.StatusInternalServerError, "cannot get friend lsit.")
 	}
 
 	result := make([]*fList, 0)
