@@ -6,24 +6,23 @@ import (
 	"time"
 
 	"../dao"
+
 	"github.com/labstack/echo"
 )
 
-type jsonType struct {
+type jsonCommentType struct {
 	Iid       int64
 	Openid    string
-	Time      time.Time
 	Content   string
-	Like      int64
-	Favorite  int64
+	Time      time.Time
 	AvatarUrl string
 	Gender    int
 	Nickname  string
 	Friend    int
 }
 
-func convertType(list []*dao.Idea, Openid string) []*jsonType {
-	result := make([]*jsonType, 0)
+func convertCommentType(raw []*dao.Comment, Openid string) []*jsonCommentType {
+	result := make([]*jsonCommentType, 0)
 
 	df := dao.NewDaoFriend()
 	defer df.Close()
@@ -32,14 +31,12 @@ func convertType(list []*dao.Idea, Openid string) []*jsonType {
 		friends = nil
 	}
 
-	for _, item := range list {
-		u := &jsonType{}
+	for _, item := range raw {
+		u := &jsonCommentType{}
 		u.Iid = item.Iid
 		u.Openid = item.Openid
-		u.Time = item.Time
 		u.Content = item.Content
-		u.Like = item.Like
-		u.Favorite = item.Favorite
+		u.Time = item.Time
 
 		user, friend := checkAnonymous(u.Openid, friends)
 		u.AvatarUrl = user.AvatarUrl
@@ -52,20 +49,18 @@ func convertType(list []*dao.Idea, Openid string) []*jsonType {
 	return result
 }
 
-func checkFriends(u *jsonType, Openid string) {
-	u.Friend = 0
-}
-
-func getIdea(c echo.Context) error {
+func getComment(c echo.Context) error {
 	Openid := c.QueryParam("Openid")
-	PageRaw := c.QueryParam("Page")
-	page, err := strconv.Atoi(PageRaw)
+	Iid := c.QueryParam("Iid")
+	iid, err := strconv.ParseInt(Iid, 10, 64)
 	if err != nil {
-		return c.JSON(http.StatusOK, "error : Page should be number")
+		return c.String(http.StatusBadRequest, "error : tell h1astro Iid should be numeric")
 	}
-	d := dao.NewDaoIdea()
+
+	d := dao.NewDaoComment()
 	defer d.Close()
-	list, err := d.QueryPage(page)
-	json := convertType(list, Openid)
-	return c.JSON(http.StatusOK, json)
+	commentList := d.GetCommentsOfIdea(iid)
+	jsons := convertCommentType(commentList, Openid)
+
+	return c.JSON(http.StatusOK, jsons)
 }
