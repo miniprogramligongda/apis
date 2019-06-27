@@ -1,7 +1,7 @@
 #!/bin/bash
 
-echo "nohup run apis &"
+echo "run apis &"
 
-nohup ./apis &
+./apis &
 
 echo "apis running"
