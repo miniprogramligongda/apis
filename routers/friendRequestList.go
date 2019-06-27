@@ -9,6 +9,7 @@ import (
 
 type fRequestList struct {
 	SubjectOpenid string
+	Notes         string
 }
 
 func friendRequestList(c echo.Context) error {
@@ -25,6 +26,7 @@ func friendRequestList(c echo.Context) error {
 	for _, item := range list {
 		f := &fRequestList{}
 		f.SubjectOpenid = item.SubjectOpenid
+		f.Notes = item.Notes
 		result = append(result, f)
 	}
 

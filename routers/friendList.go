@@ -22,6 +22,11 @@ func friendList(c echo.Context) error {
 	}
 
 	result := make([]*fList, 0)
-	for 
+	for _, item := range list {
+		f := &fList{}
+		f.SubjectOpenid = item.SubjectOpenid
+		result = append(result, f)
+	}
 
+	return c.JSON(http.StatusOK, result)
 }
