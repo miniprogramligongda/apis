@@ -32,8 +32,8 @@ echo "getting weapp"
 go  get -u "github.com/medivhzhan/weapp"
 echo "got weapp"
 
-killall apis
-echo "kill the last edition apis"
+#killall apis
+#echo "kill the last edition apis"
 
 go  build
 echo "build OK!"
