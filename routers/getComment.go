@@ -23,6 +23,14 @@ type jsonCommentType struct {
 
 func convertCommentType(raw []*dao.Comment, Openid string) []*jsonCommentType {
 	result := make([]*jsonCommentType, 0)
+
+	df := dao.NewDaoFriend()
+	defer df.Close()
+	friends, err := df.FindByObjectAndStatus(Openid, 1)
+	if err != nil {
+		friends = nil
+	}
+
 	for _, item := range raw {
 		u := &jsonCommentType{}
 		u.Iid = item.Iid
@@ -30,7 +38,7 @@ func convertCommentType(raw []*dao.Comment, Openid string) []*jsonCommentType {
 		u.Content = item.Content
 		u.Time = item.Time
 
-		user, friend := checkAnonymous(u.Openid, Openid)
+		user, friend := checkAnonymous(u.Openid, friends)
 		u.AvatarUrl = user.AvatarUrl
 		u.Gender = user.Gender
 		u.Nickname = user.Nickname

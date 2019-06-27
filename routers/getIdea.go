@@ -24,6 +24,14 @@ type jsonType struct {
 
 func convertType(list []*dao.Idea, Openid string) []*jsonType {
 	result := make([]*jsonType, 0)
+
+	df := dao.NewDaoFriend()
+	defer df.Close()
+	friends, err := df.FindByObjectAndStatus(Openid, 1)
+	if err != nil {
+		friends = nil
+	}
+
 	for _, item := range list {
 		u := &jsonType{}
 		u.Iid = item.Iid
@@ -33,20 +41,12 @@ func convertType(list []*dao.Idea, Openid string) []*jsonType {
 		u.Like = item.Like
 		u.Favorite = item.Favorite
 
-		d := dao.NewDaoUserInfo()
-		defer d.Close()
-		user, err := d.FindByOpenid(u.Openid)
-		if err == nil && user != nil {
-			u.AvatarUrl = user.AvatarUrl
-			u.Gender = user.Gender
-			u.Nickname = user.Nickname
-		}
+		user, friend := checkAnonymous(u.Openid, friends)
+		u.AvatarUrl = user.AvatarUrl
+		u.Gender = user.Gender
+		u.Nickname = user.Nickname
+		u.Friend = friend
 
-		checkFriends(u, Openid)
-		if u.Friend == 0 {
-			u.AvatarUrl = "https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/wh%3D600%2C800/sign=e746333c8cd4b31cf0699cbdb7e60b47/d788d43f8794a4c2d0b5cf5409f41bd5ad6e393e.jpg"
-			u.Nickname = "匿名用户"
-		}
 		result = append(result, u)
 	}
 	return result

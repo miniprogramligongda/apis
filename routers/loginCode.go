@@ -1,12 +1,13 @@
 package routers
 
 import (
+	"fmt"
+	"net/http"
+
 	"../conf"
 	"../dao"
-	"fmt"
 	"github.com/labstack/echo"
 	"github.com/medivhzhan/weapp"
-	"net/http"
 )
 
 type logincode struct {
@@ -42,7 +43,7 @@ func loginCode(c echo.Context) error {
 
 	res, err := weapp.Login(appID, secret, code)
 	if err != nil {
-		fmt.Errorf("%s", err)
+		fmt.Printf("%s", err.Error())
 		return c.String(http.StatusOK, "getOpenIDFailed")
 	}
 
@@ -56,7 +57,7 @@ func loginCode(c echo.Context) error {
 	}()
 	err = addUserInfo(openID, avatarURL, nickname, gender)
 	if err != nil {
-		fmt.Print("cannot add userInfo by openID: %s, error: %s/n", openID, err)
+		fmt.Printf("cannot add userInfo by openID: %s, error: %s/n", openID, err.Error())
 		return c.String(http.StatusOK, "")
 	}
 
