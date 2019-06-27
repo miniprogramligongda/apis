@@ -55,6 +55,22 @@ func (this *DaoFriend) Insert(u *Friend) error {
 	return nil
 }
 
+// HaveFriendByOSbject function
+func (this *DaoFriend) HaveFriendByOSbject(objectOpenid, subjectOpenid string) (bool, error) {
+	f := &Friend{}
+	ff := &Friend{}
+	err := this.db.Model(&Friend{}).Where("object_openid = ? AND subject_openid = ?", objectOpenid, subjectOpenid).First(f).Error
+
+	// fmt.Println("f: ", f)
+	// fmt.Println("ff: ", ff)
+	if fmt.Sprint(f) == fmt.Sprint(ff) {
+		fmt.Printf("have no record of O=%s and S=%s\n", objectOpenid, subjectOpenid)
+		return false, err
+	}
+
+	return true, err
+}
+
 // FindByObjectAndStatus function
 func (this *DaoFriend) FindByObjectAndStatus(objectOpenid string, status int) ([]*Friend, error) {
 	subjectList := make([]*Friend, 0)
