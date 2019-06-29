@@ -11,12 +11,12 @@ The back-end of WXminiprogram "分答". It is wrote by Golang and depends on **E
 - [x] Router infrastructure [2019.6.24]
 - [x] MySQL infrastructure [2019.6.25]
 
-- [ ] Indexly seperated cooperation
-  - [ ] 『收听』
-  - [ ] 『找人』
-  - [ ] 『我的』
+- [x] Indexly seperated cooperation
+  - [x] 『收听』
+  - [x] 『找人』
+  - [x] 『我的』
 
-- [ ] Main project entrance
+- [x] Main project entrance
 
 - [x] Setting the servers' envronment [2019.6.25]
 
